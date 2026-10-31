@@ -1,0 +1,478 @@
+[
+  {
+    "doc_id": "doc_001",
+    "text": "本週課程主線：平行集成與序列集成\n\n本週主題是經典機器學習的分類與迴歸（二），主簡報為 Classical Machine Learning: Classification and Regression II，重點包括集成學習、Bagging、隨機森林與 AdaBoost。\n課程主線：一個模型可能不夠穩，如何讓多個模型一起預測？\n平行集成（Parallel Ensemble）：各自學習，最後整合，主要減少預測的變異。\n序列集成（Sequential Ensemble）：一輪接一輪，後面專門補前面做不好的地方。",
+    "metadata": {
+      "title": "本週課程主線：平行集成與序列集成",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        1
+      ],
+      "section": "課程概覽",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_002",
+    "text": "開場：從聊天機器人到持續型智能體\n\n對照逐字稿約 00:00–00:05。老師用 AI 產品演進提醒學生：學技術之外，也要思考如何用在自己的專業。\n聊天機器人（Chatbot）：問一句、答一句。\n推理（Reasoning）與工具使用（Tool Use）：先思考，再查資料或呼叫工具。\n智能體（Agent）：能規劃並執行多步驟任務。\n持續型智能體（Persistent Agent）：以目標為導向（Goal-driven），在使用者離線時仍能持續推進工作。\n這是老師在課堂上的趨勢整理，重點是能力的差別，不是產品名稱與時間線。老師提出實體 AI（Physical AI）與將技術導入專業領域（Domain）兩個方向；看得到方向，不代表能確定實現時間。\n對工程學生的提醒：除了學會演算法，也要想它能幫忙解決哪個實際問題。",
+    "metadata": {
+      "title": "開場：從聊天機器人到持續型智能體",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        3
+      ],
+      "section": "1",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_003",
+    "text": "SVM：最大間隔、決策邊界與支持向量\n\n支持向量機（Support Vector Machine, SVM）面對兩群資料時，能分開它們的邊界可能很多；SVM 要選讓兩群資料間隔（Margin）盡可能大的決策邊界（Decision Boundary）。可以想成在兩群點之間留一條較寬的走廊，而不是緊貼其中一群。\n二維資料的邊界是一條線；三維是一個平面；更高維統稱超平面（Hyperplane）。\n在老師的線性可分示意中，靠近分隔走廊、卡住間隔的點稱為支持向量（Support Vectors），是決定邊界的重要資料。\n課堂問答：刪掉一個離邊界很遠的訓練點，再重新訓練，邊界如何變化？在這個理想例子中不變，因為該點沒有決定最大間隔。不是每個訓練點對邊界都一樣重要。這個答案適用於老師示意的非支持向量，不能延伸成所有 SVM 情境都必然不變。",
+    "metadata": {
+      "title": "SVM：最大間隔、決策邊界與支持向量",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        3,
+        4
+      ],
+      "section": "2.1–2.2",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_004",
+    "text": "SVM：核函數與非線性分類\n\n資料不能用直線分開時，可用核函數（Kernel Function）的想法：在另一個特徵空間（Feature Space）尋找線性分界，對應回原本空間後形成彎曲的邊界。\n老師舉高斯核（Gaussian Kernel），也常稱徑向基底函數核（Radial Basis Function Kernel, RBF Kernel）。\n原本用直線分不開，不代表換成另一種表示方式後仍分不開。核技巧（Kernel Trick）能避免直接展開所有高維特徵，但不代表運算完全沒有成本。",
+    "metadata": {
+      "title": "SVM：核函數與非線性分類",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        4
+      ],
+      "section": "2.3",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_005",
+    "text": "基礎分類器比較與高斯概念的區別\n\n對照逐字稿約 00:13–00:20。老師用糖尿病資料集（Diabetes Dataset）快速比較基礎分類器：\n1. 邏輯斯迴歸（Logistic Regression, LR）：根據特徵估計屬於某類的機率，課堂用於分類，具有線性決策邊界。\n2. 線性判別分析（Linear Discriminant Analysis, LDA）：利用各類資料分布差異，找出線性分類方式，屬於線性模型。\n3. k 最近鄰（k-Nearest Neighbors, kNN）：參考附近 k 個鄰居多半屬於哪一類，課堂列為非線性模型。\n4. 樸素貝氏（Naïve Bayes, NB）：用貝氏定理比較各類可能性，假設給定類別後各特徵條件獨立；課堂列在非線性模型組。\n5. 分類與迴歸樹（Classification and Regression Trees, CART）：反覆判斷特徵是否超過門檻，在葉節點（Leaf Node）給答案，屬於決策樹。\n6. SVM：找最大間隔邊界，能否形成非線性邊界視核函數而定。\n高斯樸素貝氏（GaussianNB）假設各類中的特徵具有高斯分布，不是像 SVM 一樣使用高斯核。邏輯斯迴歸也不是靠假設特徵具有高斯分布來定義。",
+    "metadata": {
+      "title": "基礎分類器比較與高斯概念的區別",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        4,
+        5
+      ],
+      "section": "3",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_006",
+    "text": "交叉驗證、分層抽樣與分數穩定性\n\n不要只看訓練資料上的表現。k 折交叉驗證（k-fold Cross-validation）例如分成 10 份：每次拿 9 份訓練、1 份驗證，輪流更換驗證資料，再整理各輪分數的平均與波動。\n分層 k 折（Stratified k-fold）盡量讓每份資料的類別比例接近原始比例，避免某一折幾乎沒有少數類別。\n平均（Mean）描述通常表現；標準差（Standard Deviation）或變異數（Variance）描述換一份資料時分數會不會差很多。\n老師用「平均扣掉不確定性」提醒學生重視穩健性（Robustness）：分數高也要夠穩。這不是固定的統計保證；標準差與變異數不能混為一談。",
+    "metadata": {
+      "title": "交叉驗證、分層抽樣與分數穩定性",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        5
+      ],
+      "section": "3.1–3.2",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_007",
+    "text": "課堂分類器 CV 分數與奧卡姆剃刀\n\n逐字稿口述的交叉驗證（CV）分數約為：LR 0.769、LDA 0.77、kNN 0.72、NB 0.75、決策樹 0.69、SVM 0.76。\n這些是當次資料與設定的示範結果，不是模型的永久排名。當時 LDA 略好，但各模型尚未仔細調整超參數（Hyperparameters），只是初步比較。\n奧卡姆剃刀（Occam's Razor）：如果簡單模型在可靠驗證下表現一樣好，優先考慮簡單模型。非線性或複雜不代表一定更好。",
+    "metadata": {
+      "title": "課堂分類器 CV 分數與奧卡姆剃刀",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        5
+      ],
+      "section": "3.3",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_008",
+    "text": "集成學習的整合方式、多樣性與理論條件\n\n集成學習（Ensemble Learning）先訓練多個基礎模型，再結合預測。分類可投票決定類別；迴歸可整合數值預測，例如取平均。三個模型依序預測「有、沒有、有」，多數決就判「有」。對照逐字稿約 00:20–00:44。\n關鍵是多樣性（Diversity）：若 100 個模型都犯相同錯誤，投 100 票也不會變好。我們需要錯得不一樣，而不只是模型變多。多樣性可以來自改變抽到的資料、資料權重、候選特徵或切分門檻。\n課堂二元分類理論例子假設：每個分類器優於隨機猜測，失誤率小於 50%；分類器錯誤彼此獨立。實務很難完全獨立，演算法會設法降低錯誤相關性。不是所有集成方法都必須完全獨立才有用。\n50% 是二元、等機率亂猜的基準，不能當成多類別或不平衡資料的通用門檻。",
+    "metadata": {
+      "title": "集成學習的整合方式、多樣性與理論條件",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        6
+      ],
+      "section": "4.1–4.3",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_009",
+    "text": "集成多數決失誤率：公式與數值例子\n\n假設各分類器以相同機率 ε 判錯，且錯誤獨立。三個分類器多數決，只要至少兩個判錯，集成就會錯：\nε_ensemble = 3 ε^2 (1 − ε) + ε^3。\n第一項是恰好兩個錯的三種組合；第二項是三個全部錯。每個失誤率 0.35 時，集成失誤率約 0.282，從 35% 降到約 28%。\n對奇數個分類器 m：\nε_ensemble = sum_{k=(m+1)/2}^{m} C(m,k) ε^k (1 − ε)^(m−k)。\nC(m,k) 表示從 m 個中選 k 個的組合數。公式加總「超過一半模型判錯」的各種情況機率，不是直接加總所有模型的失誤率。\n老師的 25 個模型例子：每個錯 35%，集成約錯 6%；每個錯 65%，集成約錯 94%。增加模型數會放大多數決效果，好壞都會放大。",
+    "metadata": {
+      "title": "集成多數決失誤率：公式與數值例子",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        6,
+        7
+      ],
+      "section": "4.4",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_010",
+    "text": "投票分類器：硬投票與加權投票\n\n投票分類器（Voting Classifier）可以結合不同類型模型，例如 LR、SVM 與隨機森林。\n硬投票（Hard Voting）：各模型投一個類別，採多數決，是本次課堂示範重點。\n加權投票（Weighted Voting）：某些模型的票較重，AdaBoost 也會使用這個想法。\n課堂整合分數只比單一模型稍高；競賽中小差距可能影響名次，但仍要確認可靠驗證資料上的改善。",
+    "metadata": {
+      "title": "投票分類器：硬投票與加權投票",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        7
+      ],
+      "section": "4.5",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_011",
+    "text": "Bagging 為何常搭配不穩定模型：偏差與變異\n\n不穩定分類器（Unstable Base Classifier）是訓練資料稍微改變，學到的模型可能改變很多的模型。決策樹是課堂例子：改幾個點，最先切的特徵或門檻可能改變，整棵樹也不同。\n偏差（Bias）：模型做法太簡化，抓不到真正關係。變異（Variance）：換一組訓練資料，結果就大幅變動。\n較深的樹通常更能貼合資料，但變異可能較高。Bagging 整合許多這樣的模型，希望讓結果更穩。較穩定的模型也能參與其他集成，例如 Voting Classifier；不能記成線性模型不能集成。\n理想情況下，m 個相互獨立、變異數皆為 σ^2 的數值預測，平均後 Var(g_bar) = σ^2 / m。\n各模型波動有機會互相抵銷；彼此相關時，降低變異的效果會打折扣，因此需要增加多樣性。",
+    "metadata": {
+      "title": "Bagging 為何常搭配不穩定模型：偏差與變異",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        7,
+        8
+      ],
+      "section": "5",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_012",
+    "text": "Bootstrap 放回抽樣與 Bagging 流程\n\nBagging 全名為 Bootstrap Aggregating：先重抽資料，再整合預測。對照逐字稿約 00:50–01:25。\nBootstrap Sampling 採放回抽樣：抽完一筆放回，再抽下一筆。例如原始資料 A、B、C，第一組可能抽到 A、A、C，第二組 B、C、C。同一筆可以重複，也可能完全沒抽到。每組可以和原始資料一樣多筆，但不重複資料通常比較少。\nBagging 流程：1. 對同一份訓練資料進行多次 Bootstrap。2. 每組抽樣各訓練一個模型。3. 對新輸入各自預測。4. 用投票或平均整合結果。\n各模型訓練不需等待前一個模型的答案，所以屬於平行集成（Parallel Ensemble），不代表一定要使用多台電腦。",
+    "metadata": {
+      "title": "Bootstrap 放回抽樣與 Bagging 流程",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        8
+      ],
+      "section": "6、6.1–6.2",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_013",
+    "text": "Bagging 的十個點與決策樹樁示範\n\n原始 x = 0.1、0.2、…、1.0，y 依序為 +1、+1、+1、−1、−1、−1、−1、+1、+1、+1。\n決策樹樁（Decision Stump）只做一次切分，例如判斷 x 是否小於等於門檻 k，左右各給一個類別，不能繼續往下切。\n此資料呈現「正→負→正」，單一樹樁只能切一刀，無法完整表達，最佳正確率為 70%。\n老師用不同 Bootstrap 資料訓練多個樹樁，得到不同切點與左右標籤，對原始 10 個點多數決，示範出 100% 正確率。這只是示範資料的結果，不代表未見資料也能 100%。\n標籤為 +1/−1 時，可以加總各模型輸出再取正負號（Sign）作多數決；偶數個模型可能平手，需另外訂規則。",
+    "metadata": {
+      "title": "Bagging 的十個點與決策樹樁示範",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        8,
+        9
+      ],
+      "section": "6.3",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_014",
+    "text": "Bootstrap 的 63.2% 與未抽中機率\n\n原始資料有 n 筆，放回抽 n 次，對某筆資料：\n一次沒抽到的機率 = 1 − 1/n。\nn 次都沒抽到的機率 = (1 − 1/n)^n。\n至少抽到一次的機率 = 1 − (1 − 1/n)^n；當 n 趨近無限大，此值趨近 1 − exp(−1) ≈ 0.632。\n抽樣清單仍有 n 筆，但其中有重複，所以平均約有 63.2% 的不同原始資料出現，約 36.8% 沒出現。這是大樣本近似與平均，不是每次固定比例；n=10 時平均涵蓋率約 65.1%。",
+    "metadata": {
+      "title": "Bootstrap 的 63.2% 與未抽中機率",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        9
+      ],
+      "section": "6.4",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_015",
+    "text": "袋外資料 OOB 與 Bagging 實作參數\n\n袋外資料（Out-of-bag, OOB）是某棵樹訓練抽樣時沒有抽到的資料。對那棵樹而言，這些資料沒有參與訓練，可以用來評估。\n每棵樹的袋外資料不同，不是整片森林共用固定 36.8%。對某筆資料，使用訓練時沒看過它的那些樹來預測，再與真實答案比較，可得到 OOB Score。\n可設定 oob_score=True。這是方便的內建評估方式，但要確認最終泛化能力，仍要妥善保留獨立測試資料。\n課堂參數：n_estimators 是基礎模型數量（樹模型時為樹數）；max_samples 是每個模型抽樣資料量；bootstrap 控制是否放回抽樣；random_state 固定隨機性以便重現；n_jobs 是平行工作數。\n操作主線是 Fit（擬合）→ Predict（預測）→ Evaluate（評估），不只記 API 名稱，也要知道它對應的步驟。",
+    "metadata": {
+      "title": "袋外資料 OOB 與 Bagging 實作參數",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        9,
+        10
+      ],
+      "section": "6.5–6.6",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_016",
+    "text": "隨機森林：資料抽樣與節點特徵抽樣\n\n對照逐字稿約 01:25–01:49。如果主導特徵（Dominant Feature）很強，即使各樹抽到的資料不同，仍可能第一刀就挑它，使樹很像、錯誤容易相關，限制集成效果。\n隨機森林（Random Forest, RF）除了對資料做 Bootstrap，還在每個節點切分時，隨機抽取一部分候選特徵（Feature Sampling），再從中選最佳切分。\n例如有 9 個特徵，這次抽 3 個比較，最強特徵可能沒抽到，其他特徵有機會使用。不是永遠刪掉最強特徵，也不是整棵樹只能用同一組特徵。\n分類時常用候選特徵數約為總特徵數的平方根，例如 64 個特徵時每節點約考慮 8 個；這是常用思路，不是所有情況都必須遵守。\n隨機森林 = 資料抽樣 + 節點特徵抽樣 + 多棵樹整合。它兼顧單棵樹能力與整片森林多樣性，不必讓每棵樹單獨最強。",
+    "metadata": {
+      "title": "隨機森林：資料抽樣與節點特徵抽樣",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        10,
+        11
+      ],
+      "section": "7.1–7.2",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_017",
+    "text": "隨機森林的手寫數字辨識示範\n\n老師使用 8×8 像素的手寫數字資料，約 1,797 筆樣本，每張圖 64 個像素，因此有 64 個特徵。標籤為 0–9，屬於多類別分類（Multiclass Classification）。\n隨機森林課堂示範約有 98% 表現。老師強調這是相對乾淨的示範資料，不能拿來保證真實應用準確率。",
+    "metadata": {
+      "title": "隨機森林的手寫數字辨識示範",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        11
+      ],
+      "section": "7.3",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_018",
+    "text": "特徵重要性與校舍耐震案例\n\n隨機森林的特徵重要性（Feature Importance）可記錄某特徵用來切分時，平均降低多少不純度（Impurity）。能幫忙分開混雜類別的特徵，對此模型較重要。\n在手寫數字例子，中央有筆畫的像素通常較重要，邊緣空白像素通常較不重要。可用 feature_importances_ 查看；這類重要性通常正規化，加總為 1，單一特徵不需接近 1 才算重要。\n特徵選擇（Feature Selection）可參考重要性，但是否刪除特徵仍看驗證結果；重要性不等於證明因果。\n校舍耐震評估案例候選特徵包括樓地板面積、譜加速度需求（Spectral Acceleration Demand）、鋼筋抗拉強度、Y 向牆量、建造年份（Built Year）。課堂最重要特徵為建造年份，老師解釋它可能反映某些年代的材料或施工背景，例如海砂問題。\n此例說明資料分析能發現專業直覺未先想到的線索，協助調查或補強排序；不能推成所有同年份建築都一樣，或只靠年份決定是否拆除。",
+    "metadata": {
+      "title": "特徵重要性與校舍耐震案例",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        11
+      ],
+      "section": "8.1–8.2",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_019",
+    "text": "SHAP 與隨機森林內建重要性的差異\n\nSHAP 全名為 SHapley Additive exPlanations，中文為夏普利加性解釋，用於解釋各特徵對模型預測的貢獻。逐字稿中的 shape/share 應依此理解。\n隨機森林內建重要性可先看整體哪些特徵常幫上忙；SHAP 能進一步分析某個預測中，各特徵把結果往哪個方向推動。\n本堂僅提到 SHAP，沒有完整教學。",
+    "metadata": {
+      "title": "SHAP 與隨機森林內建重要性的差異",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        12
+      ],
+      "section": "8.3",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_020",
+    "text": "分類評估：Accuracy、Precision、Recall、F1 與混淆矩陣\n\n老師在手寫數字例子先帶過，下次會詳細解釋。以某一類作為目標類別：\n正確率（Accuracy）：全部預測中，判對的比例。\n精確率（Precision）：模型預測為這一類的資料中，真正屬於這一類的比例。\n召回率（Recall）：真正屬於這一類的資料中，被模型找回的比例。\nF1 Score：Precision 與 Recall 的調和平均（Harmonic Mean），兼顧兩者。\nSupport：評估資料中，真正屬於該類的樣本數。\nMacro Average：分別計算各類指標，再讓各類等權平均。\n混淆矩陣（Confusion Matrix）：交叉列出真實類別與預測類別，觀察哪些類別容易混淆。除了總分，也能看模型特別容易把哪個數字誤認為哪個數字。",
+    "metadata": {
+      "title": "分類評估：Accuracy、Precision、Recall、F1 與混淆矩陣",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        12
+      ],
+      "section": "8.4",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_021",
+    "text": "Extra Trees 與 Bagging、Random Forest 的比較\n\n極端隨機樹（Extremely Randomized Trees, Extra Trees, ET）除了隨機挑候選特徵，也將切分門檻（Split Threshold）隨機化，增加樹的差異。先產生隨機候選門檻，再比較候選切分效果，不是完全不看資料亂切。對照逐字稿約 01:49–02:01。\nBagging：放回抽樣產生不同訓練資料，相當於每個模型拿不同練習題組。\nRandom Forest：資料放回抽樣，加上每個節點隨機挑候選特徵，相當於題組與可用線索都不同。\nExtra Trees：隨機挑候選特徵，並隨機產生候選切分門檻，連切分位置也增加一層隨機性。\n老師用「在 Random Forest 上再加門檻隨機化」說明。但 scikit-learn 的 ExtraTreesClassifier 預設 bootstrap=False，通常用完整訓練集建立各樹；是否 Bootstrap 必須確認設定。",
+    "metadata": {
+      "title": "Extra Trees 與 Bagging、Random Forest 的比較",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        12,
+        13
+      ],
+      "section": "9",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_022",
+    "text": "樹數、複雜度、測試表現與排行榜過度擬合\n\n老師比較：固定樹複雜度，改變 n_estimators（樹數）；固定樹數，改變 max_leaf_nodes（最大葉節點數）等複雜度設定。\nmax_depth（最大深度）與 max_leaf_nodes 都能限制複雜度，但限制不同。\n訓練誤差（Training Error）下降可能只是更會回答看過的題目，應看保留測試誤差（Holdout Test Error）是否改善。課堂三種方法的訓練曲線不同，但測試表現可能接近。\n樹更多或更複雜不保證每次更好；增加樹數也常出現改善趨緩。\n一直依競賽公開排行榜（Public Leaderboard）分數改模型，也可能對該批資料過度擬合，影響私有排行榜（Private Leaderboard）表現。",
+    "metadata": {
+      "title": "樹數、複雜度、測試表現與排行榜過度擬合",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        13
+      ],
+      "section": "9.1–9.2",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_023",
+    "text": "平行集成與序列集成：Bagging 和 Boosting\n\n對照逐字稿約 02:01–02:09。\n平行集成：各基礎模型可各自訓練，整合多個結果讓波動變小；代表為 Bagging、Random Forest、Extra Trees。Bagging 常搭配較深、變異較高的樹。\n序列集成（Sequential Ensemble）：下一輪利用前面預測不足決定如何訓練，逐步補誤差；代表為 AdaBoost、Gradient Boosting。Boosting 常搭配淺樹等弱學習器。\n弱學習器（Weak Learner）是能力有限、但仍提供有用訊息的簡單模型，不是比亂猜還差的模型。\nBagging 偏好深樹、AdaBoost 偏好樹樁，是降低變異與逐輪補不足的常見搭配直覺，不是強制規則。\n序列訓練不是反覆修改同一棵樹，而是逐輪加入新基礎模型，最後整合。Boosting 不一定要 Bootstrap；與 Bagging 關鍵差異是後一輪依賴前面預測結果。",
+    "metadata": {
+      "title": "平行集成與序列集成：Bagging 和 Boosting",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        13,
+        14
+      ],
+      "section": "10",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_024",
+    "text": "AdaBoost 流程與樣本權重、模型權重\n\n自適應提升（Adaptive Boosting, AdaBoost）的核心是上次做錯的題目，下次多注意。對照逐字稿約 02:09–02:25。\n流程：1. 初始每筆資料權重相同。2. 訓練第一個簡單分類器。3. 找出判錯資料，提高下輪權重。4. 依新權重訓練下一個分類器。5. 重複多輪，以加權投票整合所有分類器。\n樣本權重 w：每筆訓練資料各有一個，決定哪筆資料較值得注意。\n模型權重 α：每輪模型各有一個，決定最後投票時該分類器的票有多重。\nα 同時影響下一輪樣本權重更新及最後模型投票，但 α 與 w 不是同一種權重。",
+    "metadata": {
+      "title": "AdaBoost 流程與樣本權重、模型權重",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        14
+      ],
+      "section": "11.1–11.2",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_025",
+    "text": "二元 AdaBoost：加權失誤率與模型投票權重公式\n\n此處依課堂二元示例，真實標籤 y_i 與分類器預測 h_t(x_i) 都使用 +1/−1。\n第 t 輪加權失誤率：\nε_t = [sum_{i=1}^{n} w_i^(t) I(h_t(x_i) ≠ y_i)] / [sum_{i=1}^{n} w_i^(t)]。\nI 是指示函數：判錯時為 1，判對時為 0。權重已加總為 1 時，分母就是 1。不是只數錯幾筆，而是看判錯資料的權重合計。\n由失誤率決定模型權重：\nα_t = (1/2) ln((1 − ε_t) / ε_t)。\n失誤率低於 0.5 時 α 為正；模型表現較好，最後的票通常較重。",
+    "metadata": {
+      "title": "二元 AdaBoost：加權失誤率與模型投票權重公式",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        15
+      ],
+      "section": "11.3（前半）",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_026",
+    "text": "二元 AdaBoost：樣本權重更新與最終加權投票公式\n\nAdaBoost 二元示例的標籤與預測皆為 +1/−1。樣本權重更新公式：\nw_i^(t+1) = w_i^(t) exp(−α_t y_i h_t(x_i)) / Z_t。\n其中 α_t 為該輪模型權重。判對時 y_i 與 h_t(x_i) 同號，乘積為 +1；在 α_t 為正的情況下，乘上小於 1 的因子。判錯時異號，乘積為 −1，乘上大於 1 的因子。\nZ_t 是正規化因子（Normalization Factor），讓更新後的樣本權重加總回到 1。\n最終分類器：H(x) = sign(sum_{t=1}^{T} α_t h_t(x))。\n先將每輪模型的預測乘上模型權重 α_t，加總後取正負號。",
+    "metadata": {
+      "title": "二元 AdaBoost：樣本權重更新與最終加權投票公式",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        15
+      ],
+      "section": "11.3（後半）",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_027",
+    "text": "AdaBoost 十個點的權重更新例子與限制\n\n第一輪 10 個點每點權重 0.1，錯 3 點，因此 ε_1 = 0.3；α_1 = (1/2) ln(0.7/0.3) ≈ 0.424。\n更新並正規化後，三個判錯點各約 0.167，七個判對點各約 0.0714；三個難題合計約占一半權重，下一輪會更重視它們。\n第二輪即使仍錯 3 點，也不能直接說失誤率仍是 0.3，必須看這三點現在的權重。\n課堂使用幾個水平或垂直的樹樁切分，最後加權整合，在那些點上全部判對。這是理解機制的例子，不保證未見資料表現。\n下輪更有動機處理高權重錯例，不保證全部改對。此機制與神經網路注意力（Attention）不是同一個演算法。",
+    "metadata": {
+      "title": "AdaBoost 十個點的權重更新例子與限制",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        15,
+        16
+      ],
+      "section": "11.4",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_028",
+    "text": "梯度提升：殘差、負梯度與學習率\n\n本堂最後約 02:25–02:27 預告梯度提升與 XGBoost，下次詳細講。\nAdaBoost 改變樣本權重；梯度提升（Gradient Boosting）讓新模型學習目前還沒預測好的部分。\n平方誤差的迴歸例子可以理解為學習殘差（Residual）：r_i = y_i − y_hat_i。若真值為 10、目前預測為 7，殘差為 3，下一個模型嘗試補上差距。\n一般情況是朝損失函數（Loss Function）的負梯度（Negative Gradient）方向改進；不同損失下不一定直接等於真值減預測值。\n學習率（Learning Rate）控制每輪補多少，避免一次修得太猛；本堂尚未展開詳細推導。",
+    "metadata": {
+      "title": "梯度提升：殘差、負梯度與學習率",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        16
+      ],
+      "section": "12、12.1",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_029",
+    "text": "XGBoost、LightGBM 與 CatBoost：本堂預告範圍\n\n老師預告從梯度提升模型（Gradient Boosting Machine, GBM）講到極端梯度提升（eXtreme Gradient Boosting, XGBoost），涉及一階導數、二階資訊／海森矩陣（Hessian）、正則化（Regularization）或懲罰項（Penalty Term），以及超參數調整。\n簡報也列出 LightGBM（Light Gradient Boosting Machine）與 CatBoost。這些方法的詳細比較不是本堂已完成內容，不能把簡報中的性能形容詞當成所有資料集上的固定排名。",
+    "metadata": {
+      "title": "XGBoost、LightGBM 與 CatBoost：本堂預告範圍",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        16,
+        17
+      ],
+      "section": "12.2",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_030",
+    "text": "課堂複習八題與泛化能力提醒\n\n1. SVM 在找什麼？最大間隔的決策邊界；支持向量是決定它的重要資料點。\n2. 集成為什麼可能比單一模型好？模型提供有用訊息，且錯誤不完全相同。\n3. 集成失誤率是直接加各模型失誤率嗎？不是，是計算多數模型同時判錯的機率。\n4. Bagging 改變什麼？放回抽樣產生不同訓練資料，再整合預測。\n5. 63.2% 是什麼？放回抽 n 次後，大樣本下平均約有 63.2% 的不同原始資料至少出現一次。\n6. Random Forest 多做什麼？每個節點只考慮隨機抽到的一部分候選特徵。\n7. Extra Trees 再多做什麼？隨機產生候選切分門檻，是否 Bootstrap 看設定。\n8. AdaBoost 如何補錯？提高判錯樣本權重，逐輪訓練，最後加權投票。\n核心重點是多樣性、降低變異、逐輪補誤差與使用未參與訓練資料驗證。模型數量、複雜度或訓練分數不能代替泛化能力檢查。",
+    "metadata": {
+      "title": "課堂複習八題與泛化能力提醒",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        17
+      ],
+      "section": "13",
+      "document_type": "課堂筆記複習題（原文件內容）",
+      "source_url": null,
+      "date": null
+    }
+  },
+  {
+    "doc_id": "doc_031",
+    "text": "筆記的課堂來源與查核補充範圍\n\n筆記列出的課堂來源包括第五週簡報，主簡報為 Classification and Regression II，以及約 2 小時 28 分鐘的課堂逐字稿 PDF。筆記註明已略去休息時間私人對話、設備操作與重複語句。\n筆記另列 Bagging 補充講義；scikit-learn 官方集成方法說明，用於查核 Extra Trees 門檻隨機化與抽樣設定；scikit-learn 官方樸素貝氏說明，用於查核 GaussianNB 高斯分布假設；SHAP 官方說明，用於查核名稱與解釋用途。\n本區塊只記錄原筆記列出的來源名稱與用途，不表示此知識庫另外匯入了這些外部文件全文。",
+    "metadata": {
+      "title": "筆記的課堂來源與查核補充範圍",
+      "source": "機器學習第五週筆記.pdf",
+      "pages": [
+        17
+      ],
+      "section": "課堂來源與查核補充",
+      "document_type": "課堂筆記整理",
+      "source_url": null,
+      "date": null
+    }
+  }
+]
